@@ -1,0 +1,42 @@
+       <h1>Search Articles</h1>
+        <input type="text" id="search-input" placeholder="Search articles...">
+        <button id="search-button">Search</button>
+        <div id="articles">
+     <div class="container">
+           <div class="article" data-title="Samsat 40-40 mini HD">
+                <img src="img/samsat.jpg" width="250px" alt="Logo Samsat 40-40">
+                <h2>Samsat 40-40 mini HD</h2>
+                <p>Recepteur Hd <br> obonement avatar 12 moi gratuit <br> chering 12 mois gratuit</p>
+                <h2>80.000 DT</h2>
+                <p class="instock">In Stock</p>
+            </div>
+            <div class="article" data-title="Recepteur Box android X96 Max">
+                <img src="img/android.png" width="250px" alt="Logo Samsat 40-40">
+                <h2>Recepteur Box android X96 Max</h2>
+                <p>Recepteur Android <br> obonement avatar 12 moi gratuit <br> 4Gb Ram <br> 32Gb Stockage </p>
+                <h2>220.000 DT</h2>
+                <p class="instock">In Stock</p>
+            </div>
+            <div class="article" data-title="Understanding HTML">
+                <h2>Understanding HTML</h2>
+                <p>HTML is the standard markup language for creating web pages...</p>
+            </div>
+            <div class="article" data-title="Web Development Trends in 2024">
+                <h2>Web Development Trends in 2024</h2>
+                <p>The field of web development is constantly evolving...</p>
+            </div>
+        </div>
+    </div>
+    <h1>Articles</h1>
+    <table id="articles-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="articles-list">
+            <!-- Articles will be added dynamically here -->
+        </tbody>
+    </table>

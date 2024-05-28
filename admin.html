@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* CSS for light mode */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* CSS for dark mode */
+        body.dark-mode {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .content {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card p {
+            margin: 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+
+        /* Toggle button style */
+        .theme-toggle {
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: #0056b3;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #0a0404; /* Text color for light theme */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: #333; /* Background color for dark theme */
+    color: #000000; /* Text color for dark theme */
+}
+span{
+    color: green;
+    font-weight: bold;
+}
+h1{
+    font: optional;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+    font-variant: inherit;
+}
+.span1{
+    color: red;
+}
+
+
+
+
+
+#articles-table img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+#articles-table {
+    border-spacing: 10px; /* Add space between table cells */
+}
+
+/* Add space between tables */
+#people-table,
+#articles-table {
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+#articles-table td,
+#articles-table th {
+    padding: 10px; /* Add padding to table cells */
+}
+
+    </style>
+</head>
+<body><br><br>
+    <h1><span class="span1">Elecsat</span> Admin Panel</h1>
+    <br><br>
+    <div class="card">
+        <h2>Articles</h2>
+        <input type="text" id="article-name" placeholder="Article Name">
+        <input type="text" id="article-img" placeholder="Image URL">
+        <input type="number" id="article-price" placeholder="Price">
+        <button onclick="addArticle()">Add Article</button>
+        <button onclick="clearAllArticles()">Clear All Articles</button>
+        <table id="articles-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="articles-list">
+                <!-- Articles will be added dynamically here -->
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <script>
+function addPerson() {
+    const nameInput = document.getElementById('person-name');
+    const moneyInput = document.getElementById('person-money');
+    const name = nameInput.value.trim();
+    const money = parseFloat(moneyInput.value.trim());
+    
+    if (name !== '' && !isNaN(money)) {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td contenteditable="true">${name}</td>
+            <td contenteditable="true">${money}</td>
+            <td><button onclick="editPerson(this)">Edit</button></td>
+        `;
+        const peopleList = document.getElementById('people-list');
+        peopleList.appendChild(newRow);
+        nameInput.value = ''; // Clear name input after adding
+        moneyInput.value = ''; // Clear money input after adding
+        updateTotalMoney(); // Update total money
+    }
+}
+
+function editPerson(button) {
+    const row = button.closest('tr');
+    const nameCell = row.cells[0];
+    const moneyCell = row.cells[1];
+    nameCell.contentEditable = true;
+    moneyCell.contentEditable = true;
+    nameCell.focus(); // Focus on the editable cell
+    button.textContent = 'Save';
+    button.onclick = function() {
+        savePerson(button);
+    };
+}
+
+function savePerson(button) {
+    const row = button.closest('tr');
+    const nameCell = row.cells[0];
+    const moneyCell = row.cells[1];
+    nameCell.contentEditable = false;
+    moneyCell.contentEditable = false;
+    button.textContent = 'Edit';
+    button.onclick = function() {
+        editPerson(button);
+    };
+    updateTotalMoney(); // Update total money
+}
+
+function updateTotalMoney() {
+    const moneyCells = document.querySelectorAll('#people-list td:nth-child(2)');
+    let totalMoney = 0;
+    moneyCells.forEach(cell => {
+        totalMoney += parseFloat(cell.textContent);
+    });
+    document.getElementById('total-money').textContent = totalMoney.toFixed(2);
+}
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+}
+function clearTotalMoney() {
+    const totalMoneySpan = document.getElementById('total-money');
+    totalMoneySpan.textContent = '0';
+}
+function clearAllNames() {
+    const peopleList = document.getElementById('people-list');
+    peopleList.innerHTML = ''; // Clear all rows in the table
+    updateTotalMoney(); // Update total money after clearing names
+}
+
+
+
+
+
+
+
+
+
+
+function addArticle() {
+    const nameInput = document.getElementById('article-name');
+    const imgInput = document.getElementById('article-img');
+    const priceInput = document.getElementById('article-price');
+    
+    const name = nameInput.value.trim();
+    const img = imgInput.value.trim();
+    const price = parseFloat(priceInput.value.trim());
+    
+    if (name !== '' && img !== '' && !isNaN(price)) {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td contenteditable="true">${name}</td>
+            <td contenteditable="true"><img src="${img}" alt="${name}" style="max-width: 100px;"></td>
+            <td contenteditable="true">${price}</td>
+            <td><button onclick="editArticle(this)">Edit</button></td>
+        `;
+        const articlesList = document.getElementById('articles-list');
+        articlesList.appendChild(newRow);
+        nameInput.value = ''; // Clear name input after adding
+        imgInput.value = ''; // Clear img input after adding
+        priceInput.value = ''; // Clear price input after adding
+    }
+}
+
+function editArticle(button) {
+    const row = button.closest('tr');
+    const cells = row.cells;
+    for (let i = 0; i < cells.length - 1; i++) { // Exclude action column
+        cells[i].contentEditable = true;
+    }
+    button.textContent = 'Save';
+    button.onclick = function() {
+        saveArticle(button);
+    };
+}
+
+function saveArticle(button) {
+    const row = button.closest('tr');
+    const cells = row.cells;
+    for (let i = 0; i < cells.length - 1; i++) { // Exclude action column
+        cells[i].contentEditable = false;
+    }
+    button.textContent = 'Edit';
+    button.onclick = function() {
+        editArticle(button);
+    };
+}
+
+
+
+
+
+function addArticle() {
+        const nameInput = document.getElementById('article-name');
+        const imgInput = document.getElementById('article-img');
+        const priceInput = document.getElementById('article-price');
+        
+        const name = nameInput.value.trim();
+        const img = imgInput.value.trim();
+        const price = parseFloat(priceInput.value.trim());
+        
+        if (name !== '' && img !== '' && !isNaN(price)) {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td><img src="${img}" alt="${name}" style="max-width: 100px;"></td>
+                <td>${price}</td>
+            `;
+            const articlesList = document.getElementById('articles-list');
+            articlesList.appendChild(newRow);
+
+            // Store article data in localStorage
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            articles.push({ name, img, price });
+            localStorage.setItem('articles', JSON.stringify(articles));
+            
+            nameInput.value = ''; // Clear name input after adding
+            imgInput.value = ''; // Clear img input after adding
+            priceInput.value = ''; // Clear price input after adding
+        }
+    }
+
+
+
+
+
+    function addArticle() {
+    const nameInput = document.getElementById('article-name').value;
+    const imgInput = document.getElementById('article-img').value;
+    const priceInput = document.getElementById('article-price').value;
+    
+    if (nameInput && imgInput && priceInput) {
+        const article = {
+            name: nameInput,
+            img: imgInput,
+            price: parseFloat(priceInput)
+        };
+        
+        // Save article to localStorage
+        let articles = JSON.parse(localStorage.getItem('articles')) || [];
+        articles.push(article);
+        localStorage.setItem('articles', JSON.stringify(articles));
+        
+        // Add article to table
+        addArticleToTable(article);
+    }
+}function displayArticles() {
+    let articles = JSON.parse(localStorage.getItem('articles')) || [];
+    articles.forEach(article => {
+        addArticleToTable(article);
+    });
+}
+
+function addArticleToTable(article) {
+    const tableBody = document.getElementById('articles-list');
+    const newRow = tableBody.insertRow();
+    newRow.innerHTML = `
+        <td>${article.name}</td>
+        <td><img src="${article.img}" alt="${article.name}" style="max-width: 100px;"></td>
+        <td>${article.price}</td>
+        <td><button onclick="editArticle(this)">Edit</button></td>
+    `;
+}
+
+
+
+
+        function clearAllArticles() {
+            localStorage.removeItem('articles'); // Remove the 'articles' data from localStorage
+            displayArticles(); // Refresh the table
+        }
+
+        window.onload = function() {
+            displayArticles(); // Display articles when the page loads
+        };
+    </script>
+    </script>
+</body>
+</html>

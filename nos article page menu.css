@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Freeman&family=Jaro:opsz@6..72&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poetsen+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+nav{
+  height: 80px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 50px 0px 100px;
+  font-family: "Rubik", sans-serif;
+  border-bottom: 4px solid red;
+}
+span{ 
+  color: rgb(255, 0, 0);
+}
+nav ul {
+  display: flex;
+  list-style: none;
+}
+nav .logo{
+  font-size: 65px;
+  color: #a30202;
+  font-weight: 600;
+
+}
+nav ul li {
+  margin: 0 5px;
+}
+nav ul li a {
+  font-size: 20px;
+  color: #f80505;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+nav ul li a:hover,
+nav ul li a:active{
+  color: #1a0b0b;
+  background: #fc0303;
+}
+nav .menu-btn i{
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+}
+.mot{
+font-size: 60px;
+color: rgb(202, 8, 8);
+}
+.h3{
+font-size: 2px;
+}
+.coun{
+  color: rgb(243, 243, 243);
+  background-color: rgb(202, 8, 8);
+  height: 200px;
+  
+}
+.rean{
+  color: white;
+}
+.links a{
+  text-decoration: none;
+  color: rgb(66, 61, 61);
+  text-transform: uppercase;
+  transition: .3s;
+  opacity: 0;
+  animation: slideBottom 1s ease forwards;
+  animation-delay: .9s;
+}
+.bien{
+  font-size: 30px;
+  height: 0px;
+  color: rgb(202, 8, 8);
+}
+.elecsat{
+  font-size: 60px;
+  color: rgb(202, 8, 8);
+}
+.coun a {
+  display: inline-block;
+  padding: 0 15px;
+  font-size: 1.3em;
+  color: #FFFAE1;
+}
+.coun a:hover {
+  transform: scale(1.5);
+  transition: 0.1s;
+}
+.web{
+  color: rgb(255, 255, 255);
+  background-color: rgb(202, 8, 8);
+  text-transform: uppercase;
+  border-radius: 40px;
+  margin-top: 3.5rem;
+
+}
+.web img{
+  margin-right: 2rem;
+  transition: 0.2s;
+}
+.web img:hover{
+  transform: scale(1.2);
+}
+
+.link{
+  color: rgb(168, 81, 81);
+  background-color: rgb(165, 5, 5);
+  text-transform: uppercase;
+  border-radius: 40px;
+}
+
+.links a:hover{
+  color: rgb(202, 8, 8);
+}
+.aide{
+  color: rgb(255, 255, 255);
+  background-color: rgb(202, 8, 8);
+  text-transform: uppercase;
+  border-radius: 40px;
+}
+.aa{
+  font-size: 30px;
+}
+.h1{
+  text-align: center;
+  font-size: 70px;
+  color: black;
+  font-family: "Rubik", sans-serif;
+}
+.span2{
+  color: red;
+  font-family: "Rubik", sans-serif;
+}
+@keyframes slideRight{
+  0%{
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+@keyframes slideTop {
+  0%{
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@keyframes slideBottom{
+  0%{
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+@keyframes slideBotto{
+  0%{
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.aa{
+  font-size: 30px;
+}

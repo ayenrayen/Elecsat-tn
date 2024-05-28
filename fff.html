@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article Inventory</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .article {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .article img {
+        float: left;
+        margin-right: 20px;
+        max-width: 150px;
+        max-height: 150px;
+    }
+    .article-details {
+        overflow: hidden;
+    }
+</style>
+</head>
+<body>
+    <h1>Article Inventory</h1>
+
+    <div id="article-list">
+        <!-- Articles will be dynamically added here -->
+    </div>
+
+    <script>
+        // Get articles from localStorage
+        var articles = JSON.parse(localStorage.getItem("articles")) || [];
+
+        // Display articles
+        var articleListDiv = document.getElementById("article-list");
+        articles.forEach(function(article) {
+            var articleDiv = document.createElement("div");
+            articleDiv.classList.add("article");
+
+            var articleImage = "";
+            if (article.image) {
+                articleImage = "<img src='" + article.image + "' alt='" + article.name + "'>";
+            }
+
+            var stockStatus = article.inStock ? "In Stock" : "Out of Stock";
+
+            articleDiv.innerHTML = "<div class='article-details'>" + articleImage + "<h3>" + article.name + "</h3><p>Price: $" + article.price + "</p><p>Description: " + article.description + "</p><p>" + stockStatus + "</p></div>";
+            articleListDiv.appendChild(articleDiv);
+        });
+    </script>
+</body>
+</html>
